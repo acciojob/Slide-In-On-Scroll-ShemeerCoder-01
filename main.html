@@ -43,7 +43,7 @@
   </div>
 
   <script>
-    function debounce(func,add, wait = 20, immediate = true) {
+    function debounce(func, wait = 20, immediate = true) {
       var timeout;
       return function() {
         var context = this, args = arguments;
@@ -58,43 +58,25 @@
       };
     }
 
-	  var scrollpos = window.scrollY;
-	  const image = document.querySelector("img")
-
-	  
-	  function add(){
-		  var left = document.querySelector("img.align-left.slide-in").offsetTop;
-		  var right = document.querySelector("img.align-right.slide-in").offsetTop;
-		  if(scrollpos >= left){
-			  const add_class_on_scroll = () => image.classList.add("active");
-		  }
-		  else if(scrollpos >= right){
-			  const add_class_on_scroll = () => image.classList.add("active");
-		  }
-		  
-	  }
-
-	  // var scrollpos = window.scrollY;
-	  // var left = document.querySelector(".align-left").offsetTop;
-	  // var right = document.querySelector(".align-right").offsetTop;
-	  
-
-
-
-
-//How many pixels you need to scroll to add a class. You can change the value
-const scrollChange = 1
-
-//The function that will add the class
-const add_class_on_scroll = () => image.classList.add("active")
-
-//Tracking a "scroll" event
-window.addEventListener('scroll', function() { 
-  scrollpos = window.scrollY;
-
-//If we scrolled more than we specified in the scrollChange variable, the add class function is executed
-//   if (scrollpos >= scrollChange) { add_class_on_scroll() }
-})
+	const sliderImages = document.querySelectorAll('.slide-in');
+ 
+    function checkSlide() {
+      sliderImages.forEach(sliderImage => {
+        // half way through the image
+        const slideInAt = (window.scrollY + window.innerHeight) - sliderImage.height / 2;
+        // bottom of the image
+        const imageBottom = sliderImage.offsetTop + sliderImage.height;
+        const isHalfShown = slideInAt > sliderImage.offsetTop;
+        const isNotScrolledPast = window.scrollY < imageBottom;
+        if (isHalfShown && isNotScrolledPast) {
+          sliderImage.classList.add('active');
+        } else {
+          sliderImage.classList.remove('active');
+        }
+      });
+    }
+ 
+    window.addEventListener('scroll', debounce(checkSlide));
 
   </script>
 
