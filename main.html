@@ -59,11 +59,12 @@
     }
 
 	  var scrollpos = window.scrollY;
+	  const image = document.querySelector("img")
 
 	  
 	  function add(){
-		  var left = document.querySelector(".align-left.slide-in").offsetTop;
-		  var right = document.querySelector(".align-right.slide-in").offsetTop;
+		  var left = document.querySelector("img.align-left.slide-in").offsetTop;
+		  var right = document.querySelector("img.align-right.slide-in").offsetTop;
 		  if(scrollpos >= left){
 			  const add_class_on_scroll = () => image.classList.add("active");
 		  }
@@ -77,7 +78,7 @@
 	  // var left = document.querySelector(".align-left").offsetTop;
 	  // var right = document.querySelector(".align-right").offsetTop;
 	  
-const image = document.querySelector("img")
+
 
 
 
